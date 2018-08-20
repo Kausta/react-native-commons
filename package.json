@@ -2,7 +2,7 @@
   "name": "@kausta/react-native-commons",
   "version": "0.0.1",
   "description": "Common Stuff between my React Native Applications",
-  "main": "build/index.js",
+  "main": "publish/index.js",
   "author": "Caner Korkmaz [Kausta] <info@canerkorkmaz.com>",
   "license": "Apache-2.0",
   "private": false,
@@ -12,7 +12,10 @@
   },
   "homepage": "https://github.com/Kausta/react-native-commons",
   "bugs": "https://github.com/Kausta/react-native-commons/issues",
-  "keywords": ["react-native", "utilities"],
+  "keywords": [
+    "react-native",
+    "utilities"
+  ],
   "scripts": {
     "build": "babel lib --out-dir publish",
     "lint": "standard --verbose lib/**/*.js test/**/*.js | snazzy",
@@ -21,6 +24,7 @@
     "prepublish": "yarn run build"
   },
   "dependencies": {
+    "core-decorators": "^0.20.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -40,6 +44,9 @@
     "husky": "^1.0.0-rc.13",
     "jest": "23.4.2",
     "lint-staged": "^7.2.0",
+    "mobx": "^4",
+    "mobx-react": "^5.2.3",
+    "native-base": "^2.7",
     "prettier": "^1.14.0",
     "prettier-standard": "^8.0.1",
     "react": "16.3.1",
@@ -47,10 +54,11 @@
     "react-native": "0.55.4",
     "react-test-renderer": "16.3.1",
     "snazzy": "^7.1.1",
-    "standard": "^11.0.1",
-    "native-base": "^2.7"
+    "standard": "^11.0.1"
   },
   "peerDependencies": {
+    "mobx": ">=4",
+    "mobx-react": ">=5.2.3",
     "native-base": ">=2.6.1",
     "react": ">=16.3.1",
     "react-native": ">=0.55.4"
