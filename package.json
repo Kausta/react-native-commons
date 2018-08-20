@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "author": "Caner Korkmaz [Kausta] <info@canerkorkmaz.com>",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kausta/react-native-commons"
