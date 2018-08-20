@@ -1,6 +1,6 @@
 {
   "name": "@kausta/react-native-commons",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Common Stuff between my React Native Applications",
   "main": "publish/index.js",
   "author": "Caner Korkmaz [Kausta] <info@canerkorkmaz.com>",
@@ -17,7 +17,7 @@
     "utilities"
   ],
   "scripts": {
-    "build": "babel lib --out-dir publish",
+    "build": "babel lib --out-dir publish --source-maps",
     "lint": "standard --verbose lib/**/*.js test/**/*.js | snazzy",
     "lint-fix": "standard --verbose --fix lib/**/*.js test/**/*.js | snazzy",
     "pretty": "prettier-standard lib/**/*.js test/**/*.js | snazzy",
