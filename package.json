@@ -1,0 +1,87 @@
+{
+  "name": "@kausta/react-native-commons",
+  "version": "0.0.1",
+  "description": "Common Stuff between my React Native Applications",
+  "main": "build/index.js",
+  "author": "Caner Korkmaz [Kausta] <info@canerkorkmaz.com>",
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kausta/react-native-commons"
+  },
+  "homepage": "https://github.com/Kausta/react-native-commons",
+  "bugs": "https://github.com/Kausta/react-native-commons/issues",
+  "keywords": ["react-native", "utilities"],
+  "scripts": {
+    "build": "babel lib --out-dir publish",
+    "lint": "standard --verbose lib/**/*.js test/**/*.js | snazzy",
+    "lint-fix": "standard --verbose --fix lib/**/*.js test/**/*.js | snazzy",
+    "pretty": "prettier-standard lib/**/*.js test/**/*.js | snazzy",
+    "prepublish": "yarn run build"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "23.4.2",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "flow-bin": "^0.67.0",
+    "husky": "^1.0.0-rc.13",
+    "jest": "23.4.2",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.14.0",
+    "prettier-standard": "^8.0.1",
+    "react": "16.3.1",
+    "react-dom": "^16.4.2",
+    "react-native": "0.55.4",
+    "react-test-renderer": "16.3.1",
+    "snazzy": "^7.1.1",
+    "standard": "^11.0.1",
+    "native-base": "^2.7"
+  },
+  "peerDependencies": {
+    "native-base": ">=2.6.1",
+    "react": ">=16.3.1",
+    "react-native": ">=0.55.4"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testMatch": [
+      "**/?(*.)test.js?(x)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-standard",
+      "git add"
+    ]
+  }
+}

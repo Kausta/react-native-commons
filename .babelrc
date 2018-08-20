@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "babel-preset-react-native-stage-0/decorator-support",
+    "flow"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./lib"
+        ],
+        "extensions": [
+          ".ios.js",
+          ".android.js",
+          ".js",
+          ".json"
+        ]
+      }
+    ],
+    "transform-decorators-legacy"
+  ]
+}
