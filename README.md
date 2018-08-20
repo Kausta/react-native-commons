@@ -1,4 +1,6 @@
-# react-native-commons
+# react-native-commons [![npm version](https://badge.fury.io/js/%40kausta%2Freact-native-commons.svg)](https://badge.fury.io/js/%40kausta%2Freact-native-commons) [![NpmLicense](https://img.shields.io/npm/l/@kausta%2Freact-native-commons.svg)](./LICENSE)
+ 
+ [![NPM](https://nodei.co/npm/@kausta%2Freact-native-commons.png)](https://nodei.co/npm/@kausta%2Freact-native-commons/)
  
 Commons library for my React Native Projects 
  
