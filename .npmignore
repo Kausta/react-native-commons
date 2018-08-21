@@ -1,6 +1,7 @@
 .babelrc
 lib
 CODE_OF_CONDUCT.md
+.travis.yml
 
 # Created by https://www.gitignore.io/api/node,reactnative,intellij+all,visualstudiocode
 

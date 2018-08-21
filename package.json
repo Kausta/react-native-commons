@@ -23,6 +23,8 @@
     "lint": "standard --verbose lib/**/*.js test/**/*.js | snazzy",
     "lint-fix": "standard --verbose --fix lib/**/*.js test/**/*.js | snazzy",
     "pretty": "prettier-standard lib/**/*.js test/**/*.js | snazzy",
+    "test-unit": "echo \"No tests\"",
+    "test": "yarn pretty && yarn test-unit",
     "prepublish": "yarn run build"
   },
   "dependencies": {

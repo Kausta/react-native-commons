@@ -1,4 +1,4 @@
-# react-native-commons [![npm version](https://badge.fury.io/js/%40kausta%2Freact-native-commons.svg)](https://badge.fury.io/js/%40kausta%2Freact-native-commons) [![NpmLicense](https://img.shields.io/npm/l/@kausta%2Freact-native-commons.svg)](./LICENSE)
+# react-native-commons [![Build Status](https://travis-ci.org/Kausta/react-native-commons.svg?branch=master)](https://travis-ci.org/Kausta/react-native-commons) [![npm version](https://badge.fury.io/js/%40kausta%2Freact-native-commons.svg)](https://badge.fury.io/js/%40kausta%2Freact-native-commons) [![Known Vulnerabilities](https://snyk.io/test/github/Kausta/react-native-commons/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Kausta/react-native-commons?targetFile=package.json) [![NpmLicense](https://img.shields.io/npm/l/@kausta%2Freact-native-commons.svg)](./LICENSE)
  
  [![NPM](https://nodei.co/npm/@kausta%2Freact-native-commons.png)](https://nodei.co/npm/@kausta%2Freact-native-commons/)
  
