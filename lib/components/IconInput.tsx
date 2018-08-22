@@ -19,32 +19,38 @@
  * @format
  * @flow
  */
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Icon, Item } from 'native-base'
-import { Input } from './index'
+import { Icon, Item } from 'native-base';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Input, InputProps } from './index';
 
-type Props = {
-  iconName: string,
-  placeholder: string,
-  type: string,
-  onChangeText: (string, string) => void,
-  isLast?: boolean,
-  inputStyle?: any,
-  isSuccessful?: ?boolean // true, false or null
+interface Props extends InputProps {
+  iconName: string;
+  placeholder: string;
+  type: string;
+  onEdit: (key: string, value: string) => void;
+  isLast?: boolean;
+  inputStyle?: any;
+  isSuccessful?: boolean | null;
 }
 export default class IconInput extends React.Component<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     isLast: false,
     isSuccessful: null,
     inputStyle: {}
+  };
+
+  public _input: Input | any = null;
+
+  get input() {
+    return (this._input as Input).input;
   }
 
-  get input () {
-    return this.refs.input.input
+  public setInputRef = (value: Input) => {
+    this._input = value;
   }
 
-  render () {
+  public render() {
     const {
       iconName,
       isLast,
@@ -54,16 +60,16 @@ export default class IconInput extends React.Component<Props> {
       onChangeText,
       inputStyle,
       ...props
-    } = this.props
-    const returnKeyType = isLast ? 'done' : 'next'
-    const success = isSuccessful != null && isSuccessful
-    const error = isSuccessful != null && !isSuccessful
+    } = this.props;
+    const returnKeyType = isLast ? 'done' : 'next';
+    const success = isSuccessful !== null && isSuccessful;
+    const error = isSuccessful !== null && !isSuccessful;
     return (
       <Item style={styles.item} success={success} error={error}>
-        <Icon active name={iconName} style={styles.icon} />
+        <Icon active={true} name={iconName} style={styles.icon} />
         <Input
           {...props}
-          ref='input'
+          ref={this.setInputRef}
           returnKeyType={returnKeyType}
           blurOnSubmit={isLast}
           placeholder={placeholder}
@@ -72,10 +78,10 @@ export default class IconInput extends React.Component<Props> {
           style={inputStyle}
         />
       </Item>
-    )
+    );
   }
 }
-
+export {Props as IconInputProps};
 const styles = StyleSheet.create({
   item: {
     marginLeft: 4,
@@ -85,4 +91,4 @@ const styles = StyleSheet.create({
     width: 30,
     textAlign: 'center'
   }
-})
+});

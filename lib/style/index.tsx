@@ -20,27 +20,27 @@
  * @flow
  */
 
-type FontProps = {
-  light: string,
-  medium: string,
-  regular: string,
-  bold: string
+interface FontProps {
+  light: string;
+  medium: string;
+  regular: string;
+  bold: string;
 }
-export type ThemeManagerSettings = {
-  fontFamily: FontProps
+export interface ThemeManagerSettings {
+  fontFamily: FontProps;
 }
 
 class ThemeManager {
-  settings: ThemeManagerSettings
+  public settings: ThemeManagerSettings | null = null;
 
-  init (settings: ThemeManagerSettings): void {
-    this.settings = settings
+  public init(settings: ThemeManagerSettings): void {
+    this.settings = settings;
   }
 
-  get fontFamily (): FontProps {
-    return this.settings.fontFamily
+  get fontFamily(): FontProps {
+    return (this.settings as ThemeManagerSettings).fontFamily;
   }
 }
 
-const themeManagerInstance = new ThemeManager()
-export default themeManagerInstance
+const themeManagerInstance = new ThemeManager();
+export {themeManagerInstance as theme};
