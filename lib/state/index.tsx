@@ -20,26 +20,4 @@
  * @flow
  */
 
-export { theme, ThemeManagerSettings } from './style'
-export {
-  LightText,
-  BoldText,
-  RegularText,
-  Container,
-  Content,
-  Form,
-  FormItem,
-  FormProps,
-  Input,
-  InputProps,
-  IconInput,
-  IconInputProps,
-} from './components'
-
-import * as NavigationService from './navigation/NavigationService'
-
-export { NavigationService }
-
-import * as MobX from './state'
-
-export { MobX }
+export { default as init } from './initMobx'
