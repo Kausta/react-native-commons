@@ -20,123 +20,139 @@
  * @flow
  */
 
-import { autobind } from 'core-decorators';
-import {action, computed, observable, ObservableMap} from 'mobx';
-import { observer } from 'mobx-react/native';
-import { Form as NBForm } from 'native-base';
-import React from 'react';
-import {KeyboardTypeOptions, View} from 'react-native';
-import { IconInput } from './index';
+import { autobind } from 'core-decorators'
+import { action, computed, observable, ObservableMap } from 'mobx'
+import { observer } from 'mobx-react/native'
+import { Form as NBForm } from 'native-base'
+import React from 'react'
+import { KeyboardTypeOptions, View } from 'react-native'
+import { IconInput } from './index'
 
 interface FormItem {
-  iconName: string;
-  placeholder: string;
-  type: string;
-  keyboardType?: KeyboardTypeOptions;
-  textContentType?: 'none' | 'URL' | 'addressCity' | 'addressCityAndState' |
-        'addressState' | 'countryName' | 'creditCardNumber' | 'emailAddress' |
-        'familyName' | 'fullStreetAddress' | 'givenName' | 'jobTitle' |
-        'location' | 'middleName' | 'name' | 'namePrefix' | 'nameSuffix' |
-        'nickname' | 'organizationName' | 'postalCode' | 'streetAddressLine1' |
-        'streetAddressLine2' | 'sublocality' | 'telephoneNumber' | 'username' |
-        'password';
-  secureTextEntry?: boolean;
+  iconName: string
+  placeholder: string
+  type: string
+  keyboardType?: KeyboardTypeOptions
+  textContentType?:
+    | 'none'
+    | 'URL'
+    | 'addressCity'
+    | 'addressCityAndState'
+    | 'addressState'
+    | 'countryName'
+    | 'creditCardNumber'
+    | 'emailAddress'
+    | 'familyName'
+    | 'fullStreetAddress'
+    | 'givenName'
+    | 'jobTitle'
+    | 'location'
+    | 'middleName'
+    | 'name'
+    | 'namePrefix'
+    | 'nameSuffix'
+    | 'nickname'
+    | 'organizationName'
+    | 'postalCode'
+    | 'streetAddressLine1'
+    | 'streetAddressLine2'
+    | 'sublocality'
+    | 'telephoneNumber'
+    | 'username'
+    | 'password'
+  secureTextEntry?: boolean
 }
 
 interface FormEntries {
-  [key: string]: string | null;
+  [key: string]: string | null
 }
 
-type FormEntriesMap = ObservableMap<string, string | null>;
+type FormEntriesMap = ObservableMap<string, string | null>
 
 interface Props {
-  formItems: FormItem[];
-  validate: (field: string, formItems: FormEntriesMap) => (boolean | null);
-  submit: (entries: FormEntries) => void;
-  RenderButton: (onPress: () => void, isEnabled: boolean) => any;
+  formItems: FormItem[]
+  validate: (field: string, formItems: FormEntriesMap) => boolean | null
+  submit: (entries: FormEntries) => void
+  RenderButton: (onPress: () => void, isEnabled: boolean) => any
 }
 
+/**
+ * Form class for creating small forms easily, can have a custom button,
+ * inputs consist of {@link IconInput} classes
+ */
 @autobind
 @observer
 export default class Form extends React.Component<Props> {
-  public formItems = observable.map({});
-  public formItemsValidity = observable.map({});
+  public readonly formItems = observable.map({})
+  public readonly formItemsValidity = observable.map({})
 
-  public formItemRefs: {
-    [key: string]: React.RefObject<IconInput> | undefined
-  } = {};
-  public onSubmitEdittings: Array<(() => void) | undefined>;
+  private readonly formItemRefs: {
+    [key: string]: React.RefObject<IconInput>
+  } = {}
+  private readonly onSubmitEditing: Array<(() => void) | undefined>
 
+  /**
+   * Default constructor for Form
+   * @param props React Props
+   */
   constructor(props: Props) {
-    super(props);
-    this.populateFormItems();
+    super(props)
+    this.populateFormItems()
 
-    const { formItems } = this.props;
-    const len = formItems.length;
-    this.onSubmitEdittings = formItems.map(
+    const { formItems } = this.props
+    const len = formItems.length
+    this.onSubmitEditing = formItems.map(
       (item, i) =>
         i === len - 1
           ? undefined
-          : () => {((this.formItemRefs[formItems[i + 1].type] as React.RefObject<IconInput>).current as IconInput)
-                .input.focus();
-          }
-    );
+          : () => {
+              const field = this.formItemRefs[formItems[i + 1].type].current
+              if (!field) {
+                return
+              }
+              field.input.focus()
+            }
+    )
   }
 
+  /**
+   * Populates form items from props
+   */
   @action
-  public populateFormItems = () => {
-    const { formItems } = this.props;
+  private populateFormItems = () => {
+    const { formItems } = this.props
     for (const formItem of formItems) {
-      const { type } = formItem;
-      this.formItems.set(type, null);
-      this.formItemsValidity.set(type, null);
-      this.formItemRefs[type] = React.createRef();
+      const { type } = formItem
+      this.formItems.set(type, null)
+      this.formItemsValidity.set(type, null)
+      this.formItemRefs[type] = React.createRef()
     }
   }
 
-  @computed
-  get canSubmit() {
-    let submittable = true;
-    this.formItemsValidity.forEach(value => {
-      submittable = submittable && !!value;
-    });
-    return submittable;
-  }
-
+  /**
+   * Text change handler for key, value format of IconInput
+   * Automatically validates the input
+   * @param key Key of the field
+   * @param value New value
+   */
   @action
-  public onChangeText = (key: string, value: string) => {
-    const { validate } = this.props;
+  private onChangeText = (key: string, value: string) => {
+    const { validate } = this.props
 
-    this.formItems.set(key, value);
-    this.formItemsValidity.set(key, validate(key, this.formItems));
+    this.formItems.set(key, value)
+    this.formItemsValidity.set(key, validate(key, this.formItems))
   }
 
-  public onSubmit = () => {
-    if (!this.canSubmit) {
-      return;
-    }
-    const { submit, formItems } = this.props;
-    const fields: FormEntries = {};
-    formItems.forEach(value => {
-      const { type } = value;
-      fields[type] = this.formItems.get(type);
-    });
-    submit(fields);
-  }
-
-  public renderFormItems = () => {
-    const { formItems } = this.props;
-    const len = formItems.length;
+  /**
+   * Renders each form item
+   * @returns Form Item React Elements array for each item
+   */
+  private renderFormItems = () => {
+    const { formItems } = this.props
+    const len = formItems.length
     return formItems.map((item: FormItem, i: number) => {
-      const {
-        iconName,
-        placeholder,
-        type,
-        keyboardType,
-        textContentType,
-        secureTextEntry
-      } = item;
-      const isLast = i === len - 1;
+      const { iconName, placeholder, type, keyboardType, textContentType, secureTextEntry } = item
+      const isLast = i === len - 1
       return (
         <IconInput
           key={type}
@@ -145,7 +161,7 @@ export default class Form extends React.Component<Props> {
           type={type}
           ref={this.formItemRefs[type]}
           onEdit={this.onChangeText}
-          onSubmitEditing={this.onSubmitEdittings[i]}
+          onSubmitEditing={this.onSubmitEditing[i]}
           value={this.formItems.get(type)}
           isSuccessful={this.formItemsValidity.get(type)}
           keyboardType={keyboardType}
@@ -153,17 +169,51 @@ export default class Form extends React.Component<Props> {
           secureTextEntry={secureTextEntry}
           isLast={isLast}
         />
-      );
-    });
+      )
+    })
+  }
+
+  /**
+   * Returns whether the form can be submitted
+   *
+   * @remarks
+   * This is a mobx computable, so automatically updates
+   */
+  @computed
+  public get canSubmit() {
+    let submittable = true
+    this.formItemsValidity.forEach((value) => {
+      submittable = submittable && !!value
+    })
+    return submittable
+  }
+
+  /**
+   * The function that is called on form submit, requires {@link this.canSubmit}
+   * Calls submit props
+   */
+  public onSubmit = () => {
+    if (!this.canSubmit) {
+      return
+    }
+    const { submit, formItems } = this.props
+    const fields: FormEntries = {}
+    formItems.forEach((value) => {
+      const { type } = value
+      fields[type] = this.formItems.get(type)
+    })
+    submit(fields)
   }
 
   public render() {
-    const { RenderButton } = this.props;
+    const { RenderButton } = this.props
     return (
       <View>
         <NBForm>{this.renderFormItems()}</NBForm>
         <RenderButton onPress={this.onSubmit} isEnabled={this.canSubmit} />
       </View>
-    );
+    )
   }
 }
+
+export { Props as FormProps, FormItem }

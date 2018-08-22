@@ -20,19 +20,15 @@
  * @flow
  */
 
-import {Content as NBContent, NativeBase as NBTypes} from 'native-base';
-import React, {SFC} from 'react';
-import {ViewStyle} from 'react-native';
+import { Content as NBContent, NativeBase as NBTypes } from 'native-base'
+import React, { SFC } from 'react'
+import { ViewStyle } from 'react-native'
 
 interface Props extends NBTypes.Content {
-  style?: ViewStyle | ViewStyle[];
+  style?: ViewStyle | ViewStyle[]
 }
 
-const Content: SFC<Props> = (props: Props) => {
-  const {style, ...rest} = props;
-  return <NBContent contentContainerStyle={style} {...rest} />;
-};
-Content.defaultProps = {
-  style: {}
-};
-export default Content;
+const Content: SFC<Props> = ({ style, ...rest }: Props) => {
+  return <NBContent contentContainerStyle={style} {...rest} />
+}
+export default Content

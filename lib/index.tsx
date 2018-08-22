@@ -20,26 +20,18 @@
  * @flow
  */
 
-import {theme, ThemeManagerSettings} from './style';
-import {
-    LightText,
-    BoldText,
-    IconInput,
-    RegularText,
-    Container,
-    Content,
-    Form,
-    Input
-} from './components';
-
-export {theme, ThemeManagerSettings};
+export { theme, ThemeManagerSettings } from './style'
 export {
-    LightText,
-    RegularText,
-    BoldText,
-    Input,
-    IconInput,
-    Content,
-    Container,
-    Form
-};
+  LightText,
+  BoldText,
+  RegularText,
+  Container,
+  Content,
+  Form,
+  FormItem,
+  FormProps,
+  Input,
+  InputProps,
+  IconInput,
+  IconInputProps,
+} from './components'

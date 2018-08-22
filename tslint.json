@@ -7,6 +7,9 @@
   ],
   "rules": {
     "no-submodule-imports": false,
-    "no-use-before-declare": false
+    "no-use-before-declare": false,
+    "semicolon": [
+      true, "never"
+    ]
   }
 }

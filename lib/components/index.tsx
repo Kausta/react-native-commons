@@ -19,9 +19,9 @@
  * @format
  * @flow
  */
-export { default as Container } from './Container';
-export { default as Content } from './Content';
-export { RegularText, LightText, BoldText } from './StyledText';
-export { default as Input, InputProps } from './Input';
-export { default as IconInput, IconInputProps } from './IconInput';
-export { default as Form } from './Form';
+export { default as Container } from './Container'
+export { default as Content } from './Content'
+export { RegularText, LightText, BoldText } from './StyledText'
+export { default as Input, InputProps } from './Input'
+export { default as IconInput, IconInputProps } from './IconInput'
+export { default as Form, FormItem, FormProps } from './Form'

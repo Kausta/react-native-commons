@@ -20,12 +20,10 @@
  * @flow
  */
 
-import {Container as NBContainer, NativeBase as NBTypes} from 'native-base';
-import React, {SFC} from 'react';
+import { Container as NBContainer, NativeBase as NBTypes } from 'native-base'
+import React, { SFC } from 'react'
 
-interface Props extends NBTypes.Container {
+interface Props extends NBTypes.Container {}
 
-}
-
-const Container: SFC<Props> = (props: Props) => <NBContainer {...props} />;
-export default Container;
+const Container: SFC<Props> = (props: Props) => <NBContainer {...props} />
+export default Container
