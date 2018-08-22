@@ -1,6 +1,6 @@
 {
   "name": "@kausta/react-native-commons",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Common Stuff between my React Native Applications",
   "main": "publish/index.js",
   "typings": "publish/index.d.ts",
