@@ -35,3 +35,7 @@ export {
   IconInput,
   IconInputProps,
 } from './components'
+
+import * as NavigationService from './navigation/NavigationService'
+
+export { NavigationService }

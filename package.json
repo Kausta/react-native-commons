@@ -90,6 +90,7 @@
   "lint-staged": {
     "*.tsx": [
       "tslint -p \".\" -t stylish --fix",
+      "prettier --write",
       "git add"
     ]
   }
