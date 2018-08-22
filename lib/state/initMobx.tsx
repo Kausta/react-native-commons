@@ -21,9 +21,11 @@
  */
 
 import { configure, spy } from 'mobx'
+
 export interface StoresType {
   [key: string]: new () => {}
 }
+
 export interface StoreInstancesType {
   [key: string]: {}
 }

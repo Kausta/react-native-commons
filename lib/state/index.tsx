@@ -20,4 +20,4 @@
  * @flow
  */
 
-export { default as init } from './initMobx'
+export { default as init, StoresType, StoreInstancesType } from './initMobx'

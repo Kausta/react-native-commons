@@ -36,9 +36,7 @@ export {
   IconInputProps,
 } from './components'
 
-import * as NavigationService from './navigation/NavigationService'
-
-export { NavigationService }
+export { default as NavigationService } from './navigation/NavigationService'
 
 import * as MobX from './state'
 
