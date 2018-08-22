@@ -20,28 +20,29 @@
  * @flow
  */
 
-import React from 'react'
-import { Text } from 'react-native'
-import theme from 'style'
+import React, {SFC} from 'react';
+import {Text, TextProps, TextStyle} from 'react-native';
+import {theme} from '../style';
 
-type Props = {
-  style?: any
+interface Props extends TextProps {
+  style?: TextStyle | TextStyle[];
 }
+
 const defaultProps = {
   style: {}
-}
+};
 
-const RegularText = ({ style, ...rest }: Props) => (
+const RegularText: SFC<Props> = ({ style, ...rest }: Props) => (
   <Text {...rest} style={[style, { fontFamily: theme.fontFamily.regular }]} />
-)
-const LightText = ({ style, ...rest }: Props) => (
+);
+const LightText: SFC<Props> = ({ style, ...rest }: Props) => (
   <Text {...rest} style={[style, { fontFamily: theme.fontFamily.light }]} />
-)
-const BoldText = ({ style, ...rest }: Props) => (
+);
+const BoldText: SFC<Props> = ({ style, ...rest }: Props) => (
   <Text {...rest} style={[style, { fontFamily: theme.fontFamily.bold }]} />
-)
-RegularText.defaultProps = defaultProps
-LightText.defaultProps = defaultProps
-BoldText.defaultProps = defaultProps
+);
+RegularText.defaultProps = defaultProps;
+LightText.defaultProps = defaultProps;
+BoldText.defaultProps = defaultProps;
 
-export { RegularText, LightText, BoldText }
+export { RegularText, LightText, BoldText };

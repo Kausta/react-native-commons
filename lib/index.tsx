@@ -20,8 +20,26 @@
  * @flow
  */
 
-import React from 'react'
-import { Container } from 'native-base'
+import {theme, ThemeManagerSettings} from './style';
+import {
+    LightText,
+    BoldText,
+    IconInput,
+    RegularText,
+    Container,
+    Content,
+    Form,
+    Input
+} from './components';
 
-type Props = {}
-export default (props: Props) => <Container {...props} />
+export {theme, ThemeManagerSettings};
+export {
+    LightText,
+    RegularText,
+    BoldText,
+    Input,
+    IconInput,
+    Content,
+    Container,
+    Form
+};
