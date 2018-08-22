@@ -20,45 +20,51 @@
  * @flow
  */
 
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Input as NBInput } from 'native-base'
+import {Input as NBInput, NativeBase as NBTypes} from 'native-base';
+import React from 'react';
+import {TextStyle} from 'react-native';
 
-import theme from 'style'
+import {theme} from '../style';
 
-type Props = {
-  placeholder: string,
-  type: string,
-  onChangeText: (string, string) => void,
-  style?: any
+interface Props extends NBTypes.Input {
+  placeholder: string;
+  type: string;
+  onEdit: (key: string, value: string) => void;
+  style?: TextStyle | TextStyle[];
 }
 export default class Input extends React.Component<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {}
+  };
+
+  public _input: any = null;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {};
   }
 
-  constructor () {
-    super()
-    this.state = {}
+  get input(): any {
+    return this._input._root;
   }
 
-  get input () {
-    return this.refs.input._root
+  public setInputRef = (value: any) => {
+    this._input = value;
   }
 
-  onValueChange = value => {
-    const { type, onChangeText } = this.props
-    onChangeText(type, value)
+  public onValueChange = (value: string) => {
+    const { type, onEdit } = this.props;
+    onEdit(type, value);
   }
 
-  render () {
+  public render() {
     // OnChangeText and Type are important here so that they are not passed to NBInput
-    const { placeholder, type, onChangeText, style, ...props } = this.props
+    const { placeholder, type, onEdit, style, ...props } = this.props;
     return (
       <NBInput
         {...props}
-        ref='input'
-        autoCapitalize='none'
+        ref={this.setInputRef}
+        autoCapitalize="none"
         autoCorrect={false}
         style={[
           {
@@ -69,10 +75,11 @@ export default class Input extends React.Component<Props> {
           style
         ]}
         placeholder={placeholder}
-        placeholderTextColor='#a0a0a0'
-        underlineColorAndroid='transparent'
+        placeholderTextColor="#a0a0a0"
+        underlineColorAndroid="transparent"
         onChangeText={this.onValueChange}
       />
-    )
+    );
   }
 }
+export {Props as InputProps};

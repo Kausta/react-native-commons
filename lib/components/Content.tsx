@@ -19,9 +19,20 @@
  * @format
  * @flow
  */
-export { default as Container } from './Container'
-export { default as Content } from './Content'
-export { RegularText, LightText, BoldText } from './StyledText'
-export { default as Input } from './Input'
-export { default as IconInput } from './IconInput'
-export { default as Form } from './Form'
+
+import {Content as NBContent, NativeBase as NBTypes} from 'native-base';
+import React, {SFC} from 'react';
+import {ViewStyle} from 'react-native';
+
+interface Props extends NBTypes.Content {
+  style?: ViewStyle | ViewStyle[];
+}
+
+const Content: SFC<Props> = (props: Props) => {
+  const {style, ...rest} = props;
+  return <NBContent contentContainerStyle={style} {...rest} />;
+};
+Content.defaultProps = {
+  style: {}
+};
+export default Content;
