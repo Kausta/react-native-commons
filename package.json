@@ -1,6 +1,6 @@
 {
   "name": "@kausta/react-native-commons",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Common Stuff between my React Native Applications",
   "main": "publish/index.js",
   "typings": "publish/index.d.ts",
@@ -30,13 +30,13 @@
     "pretty": "prettier --write \"./lib/**/*.tsx\""
   },
   "dependencies": {
-    "@types/react-navigation": "^2.0.16",
     "core-decorators": "^0.20.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/react": "^16.4.11",
     "@types/react-native": "^0.56.10",
+    "@types/react-navigation": "^2.0.16",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.4",
