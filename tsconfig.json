@@ -59,7 +59,7 @@
     "skipLibCheck": true
   },
   "filesGlob": ["lib/**/*.ts", "lib/**/*.tsx"],
-  "types": ["react", "react-native", "jest"],
+  "types": ["react", "react-native", "jest", "react-navigation"],
   "exclude": ["publish", "node_modules"],
   "compileOnSave": false,
   "include": ["lib/**/*"]

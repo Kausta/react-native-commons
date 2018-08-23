@@ -19,57 +19,52 @@
  * @format
  * @flow
  */
-import { Icon, Item } from 'native-base';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Input, InputProps } from './index';
+import { Icon, Item } from 'native-base'
+import React from 'react'
+import { StyleSheet, TextInput } from 'react-native'
+import { Input, InputProps } from './index'
 
 interface Props extends InputProps {
-  iconName: string;
-  placeholder: string;
-  type: string;
-  onEdit: (key: string, value: string) => void;
-  isLast?: boolean;
-  inputStyle?: any;
-  isSuccessful?: boolean | null;
+  iconName: string
+  placeholder: string
+  type: string
+  onEdit: (key: string, value: string) => void
+  isLast?: boolean
+  inputStyle?: any
+  isSuccessful?: boolean | null
 }
+
+/**
+ * Input with Icon on left, can have green or red overlay with isSuccessful,
+ * and automatically manages return key type by isLast
+ */
 export default class IconInput extends React.Component<Props> {
   public static defaultProps = {
     isLast: false,
     isSuccessful: null,
-    inputStyle: {}
-  };
-
-  public _input: Input | any = null;
-
-  get input() {
-    return (this._input as Input).input;
+    inputStyle: {},
   }
 
-  public setInputRef = (value: Input) => {
-    this._input = value;
+  private readonly _input: React.RefObject<Input> = React.createRef()
+
+  /**
+   * Ref to internal text input field
+   */
+  public get input(): TextInput {
+    return (this._input.current as Input).input
   }
 
   public render() {
-    const {
-      iconName,
-      isLast,
-      isSuccessful,
-      placeholder,
-      type,
-      onChangeText,
-      inputStyle,
-      ...props
-    } = this.props;
-    const returnKeyType = isLast ? 'done' : 'next';
-    const success = isSuccessful !== null && isSuccessful;
-    const error = isSuccessful !== null && !isSuccessful;
+    const { iconName, isLast, isSuccessful, placeholder, type, onChangeText, inputStyle, ...props } = this.props
+    const returnKeyType = isLast ? 'done' : 'next'
+    const success = isSuccessful !== null && isSuccessful
+    const error = isSuccessful !== null && !isSuccessful
     return (
       <Item style={styles.item} success={success} error={error}>
         <Icon active={true} name={iconName} style={styles.icon} />
         <Input
           {...props}
-          ref={this.setInputRef}
+          ref={this._input}
           returnKeyType={returnKeyType}
           blurOnSubmit={isLast}
           placeholder={placeholder}
@@ -78,17 +73,17 @@ export default class IconInput extends React.Component<Props> {
           style={inputStyle}
         />
       </Item>
-    );
+    )
   }
 }
-export {Props as IconInputProps};
+export { Props as IconInputProps }
 const styles = StyleSheet.create({
   item: {
     marginLeft: 4,
-    marginRight: 4
+    marginRight: 4,
   },
   icon: {
     width: 30,
-    textAlign: 'center'
-  }
-});
+    textAlign: 'center',
+  },
+})

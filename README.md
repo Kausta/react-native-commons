@@ -18,11 +18,11 @@ Commons library for my React Native Projects
 1. cd to the repo
 2. Run `yarn build`
 
-## :no_entry_sign: Standard Compliant
+## :no_entry_sign: Standard Compliant (as much as possible in TypeScript)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-This project adheres to Standard.  Our CI enforces this, so we suggest you enable linting to keep your project compliant during development.
+This project adheres to Standard in TypeScript through tslint-config-standard with custom prettier.  Our CI enforces this, so we suggest you enable linting to keep your project compliant during development.
 
 **To Lint on Commit**
 
@@ -49,8 +49,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this repository except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 or at [LICENSE](./LICENSE) file.
 
 Unless required by applicable law or agreed to in writing, software

@@ -20,10 +20,4 @@
  * @flow
  */
 
-import { Container as NBContainer, NativeBase as NBTypes } from 'native-base'
-import React, { SFC } from 'react'
-
-interface Props extends NBTypes.Container {}
-
-const Container: SFC<Props> = (props: Props) => <NBContainer {...props} />
-export default Container
+export { default as init, StoresType, StoreInstancesType } from './initMobx'

@@ -21,26 +21,37 @@
  */
 
 interface FontProps {
-  light: string;
-  medium: string;
-  regular: string;
-  bold: string;
+  light: string
+  medium: string
+  regular: string
+  bold: string
 }
 export interface ThemeManagerSettings {
-  fontFamily: FontProps;
+  fontFamily: FontProps
 }
 
 class ThemeManager {
-  public settings: ThemeManagerSettings | null = null;
+  private _settings: ThemeManagerSettings | null = null
 
+  /**
+   * Current settings, require init to be called first
+   */
+  public get settings(): ThemeManagerSettings {
+    return this._settings as ThemeManagerSettings
+  }
+
+  /**
+   * Initialize theme manager with given settings, must be called before anything else
+   * @param settings Theme Manager Settings
+   */
   public init(settings: ThemeManagerSettings): void {
-    this.settings = settings;
+    this._settings = settings
   }
 
   get fontFamily(): FontProps {
-    return (this.settings as ThemeManagerSettings).fontFamily;
+    return this.settings.fontFamily
   }
 }
 
-const themeManagerInstance = new ThemeManager();
-export {themeManagerInstance as theme};
+const themeManagerInstance = new ThemeManager()
+export { themeManagerInstance as theme }

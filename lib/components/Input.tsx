@@ -20,66 +20,62 @@
  * @flow
  */
 
-import {Input as NBInput, NativeBase as NBTypes} from 'native-base';
-import React from 'react';
-import {TextStyle} from 'react-native';
+import { Input as NBInput, NativeBase as NBTypes } from 'native-base'
+import React from 'react'
+import { TextStyle, TextInput } from 'react-native'
 
-import {theme} from '../style';
+import { theme } from '../style'
 
 interface Props extends NBTypes.Input {
-  placeholder: string;
-  type: string;
-  onEdit: (key: string, value: string) => void;
-  style?: TextStyle | TextStyle[];
+  placeholder: string
+  type: string
+  onEdit: (key: string, value: string) => void
+  style?: TextStyle | TextStyle[]
 }
 export default class Input extends React.Component<Props> {
   public static defaultProps = {
-    style: {}
-  };
-
-  public _input: any = null;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {};
+    style: {},
   }
 
-  get input(): any {
-    return this._input._root;
+  private readonly _input: React.RefObject<NBInput> = React.createRef()
+
+  /**
+   * Ref to internal text input field
+   */
+  public get input(): TextInput {
+    // Native Base Input does contain a _root field
+    // @ts-ignore
+    return (this._input.current as NBInput)._root
   }
 
-  public setInputRef = (value: any) => {
-    this._input = value;
-  }
-
-  public onValueChange = (value: string) => {
-    const { type, onEdit } = this.props;
-    onEdit(type, value);
+  private onValueChange = (value: string) => {
+    const { type, onEdit } = this.props
+    onEdit(type, value)
   }
 
   public render() {
     // OnChangeText and Type are important here so that they are not passed to NBInput
-    const { placeholder, type, onEdit, style, ...props } = this.props;
+    const { placeholder, type, onEdit, style, ...props } = this.props
     return (
       <NBInput
         {...props}
-        ref={this.setInputRef}
+        ref={this._input}
         autoCapitalize="none"
         autoCorrect={false}
         style={[
           {
             height: 45,
             fontSize: 16,
-            fontFamily: theme.fontFamily.light
+            fontFamily: theme.fontFamily.light,
           },
-          style
+          style,
         ]}
         placeholder={placeholder}
         placeholderTextColor="#a0a0a0"
         underlineColorAndroid="transparent"
         onChangeText={this.onValueChange}
       />
-    );
+    )
   }
 }
-export {Props as InputProps};
+export { Props as InputProps }

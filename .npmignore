@@ -1,4 +1,6 @@
-.babelrc
+.prettierrc.json
+tslint.json
+tsconfig.json
 lib
 CODE_OF_CONDUCT.md
 .travis.yml

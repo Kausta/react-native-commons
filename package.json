@@ -26,9 +26,11 @@
     "test": "yarn lint-fix && yarn test-unit",
     "prepublish": "yarn lint-fix && yarn build",
     "lint": "tslint -p \".\" -t stylish",
-    "lint-fix": "tslint -p \".\" -t stylish --fix"
+    "lint-fix": "tslint -p \".\" -t stylish --fix && yarn pretty",
+    "pretty": "prettier --write \"./lib/**/*.tsx\""
   },
   "dependencies": {
+    "@types/react-navigation": "^2.0.16",
     "core-decorators": "^0.20.0"
   },
   "devDependencies": {
@@ -45,9 +47,11 @@
     "mobx": "^4",
     "mobx-react": "^5.2.3",
     "native-base": "^2.7",
+    "prettier": "^1.14.2",
     "react": "16.3.1",
     "react-dom": "^16.4.2",
     "react-native": "0.55.4",
+    "react-navigation": "^2.11.2",
     "react-test-renderer": "16.3.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.11.0",
@@ -63,7 +67,8 @@
     "mobx-react": ">=5.2.3",
     "native-base": ">=2.6.1",
     "react": ">=16.3.1",
-    "react-native": ">=0.55.4"
+    "react-native": ">=0.55.4",
+    "react-navigation": ">=2"
   },
   "jest": {
     "preset": "react-native",
@@ -85,6 +90,7 @@
   "lint-staged": {
     "*.tsx": [
       "tslint -p \".\" -t stylish --fix",
+      "prettier --write",
       "git add"
     ]
   }
