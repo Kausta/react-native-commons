@@ -32,22 +32,27 @@ interface FormItem {
   iconName: string
   placeholder: string
   type: string
-  keyboardType?: KeyboardTypeOptions
-  textContentType?: TextContentType
-  secureTextEntry?: boolean
+  keyboardType?: KeyboardTypeOptions | undefined
+  textContentType?: TextContentType | undefined
+  secureTextEntry?: boolean | undefined
 }
 
 interface FormEntries {
-  [key: string]: string | null
+  [key: string]: string | undefined
 }
 
-type FormEntriesMap = ObservableMap<string, string | null>
+type FormEntriesMap = ObservableMap<string, string | undefined>
+
+interface ButtonProps {
+  onPress: () => void
+  isEnabled: boolean
+}
 
 interface Props {
   formItems: FormItem[]
-  validate: (field: string, formItems: FormEntriesMap) => boolean | null
+  validate: (field: string, formItems: FormEntriesMap) => boolean | undefined
   submit: (entries: FormEntries) => void
-  RenderButton: (onPress: () => void, isEnabled: boolean) => any
+  RenderButton: (props: ButtonProps) => JSX.Element
 }
 
 /**
@@ -97,8 +102,8 @@ export default class Form extends React.Component<Props> {
     const { formItems } = this.props
     for (const formItem of formItems) {
       const { type } = formItem
-      this.formItems.set(type, null)
-      this.formItemsValidity.set(type, null)
+      this.formItems.set(type, undefined)
+      this.formItemsValidity.set(type, undefined)
       this.formItemRefs[type] = React.createRef()
     }
   }
@@ -190,8 +195,6 @@ export default class Form extends React.Component<Props> {
   }
 }
 
-export { Props as FormProps, FormItem }
-
 type TextContentType =
   | 'none'
   | 'URL'
@@ -219,3 +222,5 @@ type TextContentType =
   | 'telephoneNumber'
   | 'username'
   | 'password'
+
+export { Props as FormProps, FormItem, FormEntries, FormEntriesMap, TextContentType, ButtonProps }
